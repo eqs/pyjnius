@@ -1,0 +1,76 @@
+on: push
+name: on push
+jobs:
+  Tests:
+    name: base
+    strategy:
+      matrix:
+        python: [ '2.7', '3.5', '3.6', '3.7' ]
+        java: [ '8', '9', '10' ] # , '11' ]
+        os: [ 'ubuntu-latest', 'windows-latest' ]
+        architecture: [ 'x64' ]  # , 'x86' ]
+
+    runs-on: ${{ matrix.os }}
+    steps:
+    - uses: actions/checkout@master
+
+    - name: Setup python
+      uses: actions/setup-python@v1
+      with:
+        python-version: ${{ matrix.python }}
+
+    - name: Setup java
+      uses: actions/setup-java@v1
+      with:
+        java-version: ${{ matrix.java }}
+        architecture: ${{ matrix.architecture }} # x64 // (x64 or x86) - defaults to x64
+
+    - name: install
+      run: pip install .[dev,ci]
+
+    - name: test
+      run: |
+        ant all
+        cd tests
+        CLASSPATH=../build/test-classes:../build/classes nosetests -v
+
+#     - name: coveralls
+#       run: python -m coveralls
+#       env:
+#         COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
+
+#   TestsPyPy:
+#     name: test pypy
+#     runs-on: ubuntu-latest
+#     steps:
+#     - uses: actions/checkout@master
+#     - name: Setup python
+#       uses: actions/setup-python@v1
+#       with:
+#         python-version: pypy3
+#     - name: prepare
+#       run: pip install -U setuptools wheel
+#     - name: install
+#       run: pip install .[dev,ci]
+#     - name: test
+#       run: python -m pytest --reruns 5 tests/ --cov oscpy/ --cov-branch
+#     - name: coveralls
+#       run: python -m coveralls
+#       env:
+#         COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
+
+#   TestsMacOs:
+#     name: test OSX
+#     runs-on: macOs-latest
+#     steps:
+#     - uses: actions/checkout@master
+#     - name: prepare
+#       run: pip install -U setuptools wheel
+#     - name: install
+#       run: pip install .[dev,ci]
+#     - name: test
+#       run: python -m pytest --reruns 5 tests/ --cov oscpy/ --cov-branch
+#     - name: coveralls
+#       run: python -m coveralls
+#       env:
+#         COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}

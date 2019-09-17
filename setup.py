@@ -293,5 +293,9 @@ setup(
             extra_link_args=EXTRA_LINK_ARGS
         )
     ],
+    extras_require={
+        'dev': ['nose', 'wheel', 'pytest-cov', 'pycodestyle'],
+        'ci': ['coveralls', 'pytest-rerunfailures'],
+    },
     **SETUP_KWARGS
 )

@@ -2,13 +2,8 @@ all: build_ext
 
 .PHONY: build_ext tests
 
-ifdef PYTHON3
-PYTHON=python3
-NOSETESTS=nosetests-3.4
-else
 PYTHON=python
 NOSETESTS=nosetests
-endif
 
 JAVAC_OPTS=-target 1.6 -source 1.6
 JAVAC=javac $(JAVAC_OPTS)
