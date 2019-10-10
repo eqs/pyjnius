@@ -28,9 +28,7 @@ jobs:
       run: pip install .[dev,ci]
 
     - name: test
-      run: |
-        cd tests
-        CLASSPATH=build/test-classes:build/classes nosetests -v
+      run: make tests
 
 #     - name: coveralls
 #       run: python -m coveralls
