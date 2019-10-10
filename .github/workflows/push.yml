@@ -83,10 +83,4 @@ jobs:
       run: |
         ant all
         cd tests
-          CLASSPATH=../build/test-classes:../build/classes nosetests -v
-
-    - name: test
-      run: |
-        ant all
-        cd tests
-        CLASSPATH=../build/test-classes:../build/classes nosetests -v
+          CLASSPATH=../build/test-classes:../build/classes python -m nose -v
