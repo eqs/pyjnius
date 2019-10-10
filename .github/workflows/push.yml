@@ -75,6 +75,7 @@ jobs:
 
     - name: install
       run: |
+        brew install ant
         pip install --user -U setuptools
         pip install --user .[dev,ci]
 
