@@ -5,9 +5,10 @@ jobs:
     name: base
     strategy:
       matrix:
-        python: [ '2.7', '3.5', '3.6', '3.7']
-        java: [ '8', '9', '10', '11' ]
-        os: ['ubuntu-latest']  # , 'windows-latest']
+        python: [ '2.7' ] # , '3.5', '3.6', '3.7' ]
+        java: [ '8' ] # , '9', '10', '11' ]
+        os: [ 'ubuntu-latest' ]  # , 'windows-latest' ]
+        architecture: [ 'x64' ]  # , 'x86' ]
 
     runs-on: ${{ matrix.os }}
     steps:
@@ -22,14 +23,16 @@ jobs:
       uses: actions/setup-java@v1
       with:
         java-version: ${{ matrix.java }}
-        architecture: x64 // (x64 or x86) - defaults to x64
+        architecture: ${{ matrix.architecture }} # x64 // (x64 or x86) - defaults to x64
 
     - name: install
       run: pip install .[dev,ci]
 
     - name: test
-      run:
-        CLASSPATH=build/test-classes:build/classes nosetests -v
+      run: |
+        ant all
+        cd tests
+        CLASSPATH=../build/test-classes:../build/classes nosetests -v
 
 #     - name: coveralls
 #       run: python -m coveralls
