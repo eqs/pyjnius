@@ -8,19 +8,19 @@ jobs:
         python:
            - '2.7'
            - '3.5'
-           # - '3.6'
-           # - '3.7'
+           - '3.6'
+           - '3.7'
         java:
           - '8'
           - '9'
           - '10'
           # - '11'
         os:
-          # - 'ubuntu-latest'
-          - 'windows-latest'
-        architecture: 
+          - 'ubuntu-latest'
+          # - 'windows-latest'
+        architecture:
           - 'x64'
-          # - 'x86'
+          - 'x86'
 
     runs-on: ${{ matrix.os }}
     steps:
