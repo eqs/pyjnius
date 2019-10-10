@@ -3,10 +3,7 @@ Setup.py for creating a binary distribution.
 '''
 
 from __future__ import print_function
-try:
-    from setuptools import setup, Extension
-except ImportError:
-    from distutils.core import setup, Extension
+from setuptools import setup, Extension
 try:
     import subprocess32 as subprocess
 except ImportError:
