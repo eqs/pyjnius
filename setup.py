@@ -15,6 +15,8 @@ import sys
 from platform import machine
 from setup_sdist import SETUP_KWARGS
 
+from jnius import __version__
+
 PY2 = sys.version_info < (3, 0, 0)
 
 
