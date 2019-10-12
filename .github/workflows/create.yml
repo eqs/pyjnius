@@ -1,13 +1,54 @@
 on: create
 name: on create
 jobs:
+  Build:
+    name: build
+    strategy:
+      matrix:
+        python:
+          - '2.7'
+          - '3.5'
+          - '3.6'
+          - '3.7'
+        java:
+          - '8'
+          - '9'
+          - '10'
+          # - '11'  # seems to segfault in python3.7?
+        os:
+          - 'ubuntu-latest'
+          # - 'windows-latest' # doesn't work yet because VS c++14 is not found
+        architecture:
+          - 'x64'
+          - 'x86'
+
+    runs-on: ${{ matrix.os }}
+    steps:
+    - uses: actions/checkout@master
+
+    - name: Setup python
+      uses: actions/setup-python@v1
+      with:
+        python-version: ${{ matrix.python }}
+
+    - name: Setup java
+      uses: actions/setup-java@v1
+      with:
+        java-version: ${{ matrix.java }}
+        architecture: ${{ matrix.architecture }} # x64 // (x64 or x86) - defaults to x64
+
+    - name: build wheel
+      run: |
+        pip install -U setuptools wheel
+        python setup.py bdist_wheel
+
   Release:
-    name: base
+    name: release
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@master
     - name: release
       run: .github/actions/scripts/release.sh
       env:
-        TWINE_PASSWORD: ${{ secrets.PYPI_TOKEN }}
+        TWINE_PASSWORD: ${{ secrets.TWINE_PASSWORD }}
         GITHUB_OAUTH_TOKEN: ${{ secrets.GITHUB_OAUTH_TOKEN }}
