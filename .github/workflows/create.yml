@@ -1,6 +1,4 @@
-on: push
-tags:
-  - 1.*
+on: create
 name: Continiuous Delivery
 jobs:
   Release:
