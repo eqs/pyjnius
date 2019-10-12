@@ -45,22 +45,24 @@ Please ensure that your `JDK_HOME` or `JAVA_HOME` environment variable points
 to the installed JDK root directory, and that the JVM library (`jvm.so` or
 `jvm.dll`) is available from your `PATH` environment variable. **Failure to do
 so may result in a failed install, or a successful install but inability to
-use the pyjnius library.**
+use the PyJNIus library.**
 
-    make
+```
+make
+```
 
-That's it! You can run the tests using
+That's it! You can ensure everything is running correctly using::
 
-    make tests
-
-to ensure everything is running correctly.
+```
+make tests
+```
 
 Usage with python-for-android
 -----------------------------
 
-* Get http://github.com/kivy/python-for-android
-* Compile a distribution with kivy (pyjnius will be automatically added)
-* Then, you can do this kind of thing:
+* Get [http://github.com/kivy/python-for-android]()
+* Compile a distribution with kivy (PyJNIus will be automatically added)
+* Then, you can do this kind of things:
 
 ```python
 from time import sleep
@@ -106,7 +108,7 @@ I/python  ( 5983): [0.13407529890537262, 9.4235782623291016, 2.2026655673980713]
 Advanced example
 ----------------
 
-When you use autoclass, it will discover all the methods and fields of the
+When you use `autoclass`, it will discover all the methods and fields of the
 object and resolve them. For now, it is better to declare and use only what you
 need. The previous example can be done manually as follows:
 

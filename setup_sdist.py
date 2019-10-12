@@ -11,6 +11,9 @@ meant for installing via pip.
 from distutils.core import setup
 from os.path import join
 
+with open("README.md") as f:
+    README = f.read()
+
 
 with open(join('jnius', '__init__.py')) as fd:
     VERSION = [
@@ -22,25 +25,34 @@ with open(join('jnius', '__init__.py')) as fd:
 SETUP_KWARGS = {
     'name': 'pyjnius',
     'version': VERSION,
+    'url': "https://github.com/kivy/pyjnius",
     'packages': ['jnius'],
     'py_modules': ['jnius_config', 'setup'],
     'ext_package': 'jnius',
     'package_data': {
         'jnius': ['src/org/jnius/*'],
     },
+    'long_description_content_type': 'text/marktown',
+    'long_description': README,
+    'author': 'Kivy Team and other contributors',
+    'author_email': 'kivy-dev@googlegroups.com',
+    'short_description': "A Python module to access Java classes as Python classes using JNI.",
+    'keywords': 'Java JNI Android',
     'classifiers': [
-        'Development Status :: 4 - Beta',
+        'Development Status :: 5 - Production/Stable',
         'Intended Audience :: Developers',
         'License :: OSI Approved :: MIT License',
         'Natural Language :: English',
         'Operating System :: MacOS',
         'Operating System :: Microsoft :: Windows',
         'Operating System :: POSIX :: Linux',
+        'Operating System :: Android',
         'Programming Language :: Python :: 2.7',
         'Programming Language :: Python :: 3.3',
         'Programming Language :: Python :: 3.4',
         'Programming Language :: Python :: 3.5',
         'Programming Language :: Python :: 3.6',
+        'Programming Language :: Python :: 3.7',
         'Topic :: Software Development :: Libraries :: Application Frameworks'
     ]
 }
