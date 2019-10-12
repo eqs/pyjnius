@@ -32,7 +32,7 @@ SETUP_KWARGS = {
     'package_data': {
         'jnius': ['src/org/jnius/*'],
     },
-    'long_description_content_type': 'text/marktown',
+    'long_description_content_type': 'text/markdown',
     'long_description': README,
     'author': 'Kivy Team and other contributors',
     'author_email': 'kivy-dev@googlegroups.com',
