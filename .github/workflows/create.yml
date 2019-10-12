@@ -1,5 +1,7 @@
-on: create
-name: on create
+on: push
+tags:
+  - 1.*
+name: Continiuous Delivery
 jobs:
   Release:
     name: release
